@@ -1,1 +1,3 @@
-#TietokantaProjekti
+Tietokantojen perusteiden projektityö
+
+Mallinnetaan yksinkertaista tietokantaa postipakettien seurantamiseen
