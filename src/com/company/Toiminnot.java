@@ -25,11 +25,17 @@ public class Toiminnot{
 
     }
     public void teeTietokanta() throws SQLException{  // lisaa try catch ettei ohjelma mene vituiks
-        Statement s = this.db.createStatement();
-        s.execute("CREATE TABLE Asiakkaat (id INTEGER PRIMARY KEY, nimi TEXT)");
-        s.execute("CREATE TABLE Paikat (id INTEGER PRIMARY KEY, nimi TEXT)");
-        s.execute("CREATE TABLE Paketit (id INTEGER PRIMARY KEY, koodi TEXT, asiakas_id INTEGER)");
-        s.execute("CREATE TABLE Tapahtumat (id INTEGER PRIMARY KEY, paketti_id INTEGER, paikka_id INTEGER, tapahtuman_kuvaus TEXT)");
+        try{
+            Statement s = this.db.createStatement();
+            s.execute("CREATE TABLE Asiakkaat (id INTEGER PRIMARY KEY, nimi TEXT)");
+            s.execute("CREATE TABLE Paikat (id INTEGER PRIMARY KEY, nimi TEXT)");
+            s.execute("CREATE TABLE Paketit (id INTEGER PRIMARY KEY, koodi TEXT, asiakas_id INTEGER)");
+            s.execute("CREATE TABLE Tapahtumat (id INTEGER PRIMARY KEY, paketti_id INTEGER, paikka_id INTEGER, tapahtuman_kuvaus TEXT)");
+        }
+        catch (Exception e){
+            System.out.println("Tietokanta tehtynä jo valmiiksi");
+        }
+
     }
     public void teeAsiakas(String nimi) throws SQLException{
         if(!loytyy("Asiakkaat", nimi)){
