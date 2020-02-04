@@ -25,11 +25,17 @@ public class Toiminnot{
 
     }
     public void teeTietokanta() throws SQLException{  // lisaa try catch ettei ohjelma mene vituiks
-        Statement s = this.db.createStatement();
-        s.execute("CREATE TABLE Asiakkaat (id INTEGER PRIMARY KEY, nimi TEXT)");
-        s.execute("CREATE TABLE Paikat (id INTEGER PRIMARY KEY, nimi TEXT)");
-        s.execute("CREATE TABLE Paketit (id INTEGER PRIMARY KEY, koodi TEXT, asiakas_id INTEGER)");
-        s.execute("CREATE TABLE Tapahtumat (id INTEGER PRIMARY KEY, paketti_id INTEGER, paikka_id INTEGER, tapahtuman_kuvaus TEXT)");
+        try{
+            Statement s = this.db.createStatement();
+            s.execute("CREATE TABLE Asiakkaat (id INTEGER PRIMARY KEY, nimi TEXT)");
+            s.execute("CREATE TABLE Paikat (id INTEGER PRIMARY KEY, nimi TEXT)");
+            s.execute("CREATE TABLE Paketit (id INTEGER PRIMARY KEY, koodi TEXT, asiakas_id INTEGER)");
+            s.execute("CREATE TABLE Tapahtumat (id INTEGER PRIMARY KEY, paketti_id INTEGER, paikka_id INTEGER, tapahtuman_kuvaus TEXT)");
+        }
+        catch (Exception e){
+            System.out.println("Valmis tietokanta jo tehtynä");
+        }
+
     }
     public void teeAsiakas(String nimi) throws SQLException{
         if(!loytyy("Asiakkaat", nimi)){
@@ -72,7 +78,7 @@ public class Toiminnot{
             p.execute();
         }
         else{
-            System.out.println("Asiakasta ei löydy tietokannasta");
+            System.out.println("Jotain tietoa ei löydy tietokannasta");
         }
 
     }
@@ -85,6 +91,10 @@ public class Toiminnot{
         if(table.equals("Paketit")){
             p = this.db.prepareStatement("SELECT id FROM Paketit WHERE koodi = ?");
         }
+        if(table.equals("Paikat")){
+            p = this.db.prepareStatement("SELECT id FROM Paikat WHERE nimi = ?");
+        }
+
 
         p.setString(1, haettava);
         ResultSet r = p.executeQuery();
@@ -93,6 +103,14 @@ public class Toiminnot{
         return id;
     }
 
+    public void haeHistoria(String koodi) throws SQLException{
+        if(loytyy("Paketit", koodi)){
+
+        }
+        else{
+            System.out.println("Pakettia ei löytynyt");
+        }
+    }
 
     public Boolean loytyy(String table, String haettava) throws SQLException{ ///etsii pöydästä tietoa, palauttaa true jos löytyy
         PreparedStatement p = null;
