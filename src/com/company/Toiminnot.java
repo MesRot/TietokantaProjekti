@@ -2,7 +2,6 @@ package com.company;
 
 
 import java.sql.*;
-import java.util.ArrayList;
 
 public class Toiminnot{
     Connection db;
@@ -11,7 +10,7 @@ public class Toiminnot{
         this.db = DriverManager.getConnection("jdbc:sqlite:testi.db");
     }
     public void teePaikka(String paikannimi) throws SQLException {
-        if(!loytyy("Paikat", paikannimi)){
+        if(!this.loytyy("Paikat", paikannimi)){
             Connection db = DriverManager.getConnection("jdbc:sqlite:testi.db");
             Statement s = db.createStatement();
             PreparedStatement p = db.prepareStatement("INSERT INTO Paikat (nimi) VALUES (?)");
@@ -24,7 +23,7 @@ public class Toiminnot{
 
 
     }
-    public void teeTietokanta() throws SQLException{  // lisaa try catch ettei ohjelma mene vituiks
+    public void teeTietokanta() {
         try{
             Statement s = this.db.createStatement();
             s.execute("CREATE TABLE Asiakkaat (id INTEGER PRIMARY KEY, nimi TEXT)");
@@ -38,9 +37,8 @@ public class Toiminnot{
 
     }
     public void teeAsiakas(String nimi) throws SQLException{
-        if(!loytyy("Asiakkaat", nimi)){
+        if(!this.loytyy("Asiakkaat", nimi)){
             Connection db = DriverManager.getConnection("jdbc:sqlite:testi.db");
-            Statement s = db.createStatement();
             PreparedStatement p = db.prepareStatement("INSERT INTO Asiakkaat (nimi) VALUES (?)");
             p.setString(1,nimi);
             p.execute();
@@ -52,9 +50,8 @@ public class Toiminnot{
 
     }
     public void teePaketti(String koodi, String asiakasNimi) throws SQLException {
-        if(loytyy("Asiakkaat", asiakasNimi)){
+        if(this.loytyy("Asiakkaat", asiakasNimi)){
             Connection db = DriverManager.getConnection("jdbc:sqlite:testi.db");
-            Statement s = db.createStatement();
             int asiakasid = haeId("Asiakkaat", asiakasNimi);
             PreparedStatement p = db.prepareStatement("INSERT INTO Paketit (koodi, asiakas_id) VALUES (?, ?)");
             p.setString(1, koodi);
@@ -66,9 +63,8 @@ public class Toiminnot{
         }
     }
     public void teeTapahtuma(String koodi, String paikka, String kuvaus) throws SQLException{
-        if(loytyy("Paketit", koodi) && loytyy("Paikat", paikka)){
+        if(this.loytyy("Paketit", koodi) && this.loytyy("Paikat", paikka)){
             Connection db = DriverManager.getConnection("jdbc:sqlite:testi.db");
-            Statement s = db.createStatement();
             int paikkaId = haeId("Paikat", paikka);
             int pakettiId = haeId("Paketit", koodi);
             PreparedStatement p = db.prepareStatement("INSERT INTO Tapahtumat (paketti_id, paikka_id, tapahtuman_kuvaus) VALUES (?, ?, ?)");
@@ -96,6 +92,7 @@ public class Toiminnot{
         }
 
 
+        assert p != null;
         p.setString(1, haettava);
         ResultSet r = p.executeQuery();
         int id = r.getInt("id");
@@ -104,7 +101,7 @@ public class Toiminnot{
     }
 
     public void haeHistoria(String koodi) throws SQLException{
-        if(loytyy("Paketit", koodi)){
+        if(this.loytyy("Paketit", koodi)){
 
         }
         else{
@@ -112,18 +109,22 @@ public class Toiminnot{
         }
     }
 
-    public Boolean loytyy(String table, String haettava) throws SQLException{ ///etsii pöydästä tietoa, palauttaa true jos löytyy
+    private Boolean loytyy(String table, String haettava) throws SQLException{ ///etsii pöydästä tietoa, palauttaa true jos löytyy
         PreparedStatement p = null;
         if(table.equals("Asiakkaat")){
             p = this.db.prepareStatement("SELECT nimi FROM Asiakkaat WHERE nimi=?");
-
         }
-        if(table.equals("Paikat")){
+        else if(table.equals("Paikat")){
             p = this.db.prepareStatement("SELECT nimi FROM Paikat WHERE nimi = ?");
         }
-        if(table.equals("Paketit")){
+        else if(table.equals("Paketit")){
             p = this.db.prepareStatement("SELECT koodi FROM Paketit WHERE koodi = ?");
         }
+        else{
+            System.out.println("Ei löydetty pöytää");
+            return false;
+        }
+        assert p != null;
         p.setString(1, haettava);
         ResultSet r = p.executeQuery();
         Boolean loytyy = r.next();

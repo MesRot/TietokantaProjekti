@@ -2,18 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="47ea79e1-1d82-4f90-8cf1-940e90f17657" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/company/Tapahtuma.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TieKanHarTyö/Tapahtuma.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TieKanHarTyö/com/company/Asiakas.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TieKanHarTyö/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TieKanHarTyö/com/company/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TieKanHarTyö/com/company/Paikka.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TieKanHarTyö/com/company/Paketti.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TieKanHarTyö/com/company/Toiminnot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TieKanHarTyö/com/company/Toiminnot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tapahtuma.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Asiakas.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TieKanHarTyö/com/company/sqlite-jdbc-3.30.1.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Paikka.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Paketti.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Tapahtuma.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Toiminnot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Toiminnot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/sqlite-jdbc-3.30.1.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/testi.db" beforeDir="false" afterPath="$PROJECT_DIR$/testi.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -76,10 +75,19 @@
       <option name="presentableId" value="Default" />
       <updated>1580733730285</updated>
     </task>
+    <task id="LOCAL-00001" summary="Created tapahtuma class">
+      <created>1580828900138</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1580828900138</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <MESSAGE value="Created tapahtuma class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Created tapahtuma class" />
   </component>
   <component name="WindowStateProjectService">
     <state x="451" y="197" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1580826753187">
@@ -98,10 +106,10 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="726" y="288" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1920.0.1920.1080/67.27.1853.1053@67.27.1853.1053" timestamp="1580827391181" />
-    <state x="534" y="135" width="909" height="807" key="CommitChangelistDialog2" timestamp="1580827813502">
+    <state x="534" y="135" width="909" height="807" key="CommitChangelistDialog2" timestamp="1580828900002">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state x="534" y="135" width="909" height="807" key="CommitChangelistDialog2/1920.0.1920.1080/67.27.1853.1053@67.27.1853.1053" timestamp="1580827813502" />
+    <state x="534" y="135" width="909" height="807" key="CommitChangelistDialog2/1920.0.1920.1080/67.27.1853.1053@67.27.1853.1053" timestamp="1580828900002" />
     <state x="532" y="210" width="924" height="684" key="DBNavigator.ProjectSettingsDialog" timestamp="1580825469686">
       <screen x="79" y="27" width="1841" height="1053" />
     </state>
@@ -111,31 +119,35 @@
     </state>
     <state x="776" y="367" key="FileChooserDialogImpl/1920.0.1920.1080/67.27.1853.1053@67.27.1853.1053" timestamp="1580826749532" />
     <state x="783" y="367" width="520" height="484" key="FileChooserDialogImpl/79.27.1841.1053@79.27.1841.1053" timestamp="1580814191601" />
-    <state width="1807" height="287" key="GridCell.Tab.0.bottom" timestamp="1580827366794">
+    <state width="1807" height="287" key="GridCell.Tab.0.bottom" timestamp="1580830648885">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="287" key="GridCell.Tab.0.bottom/1920.0.1920.1080/67.27.1853.1053@67.27.1853.1053" timestamp="1580827366794" />
+    <state width="1807" height="287" key="GridCell.Tab.0.bottom/1920.0.1920.1080/67.27.1853.1053@67.27.1853.1053" timestamp="1580830648885" />
     <state width="1795" height="440" key="GridCell.Tab.0.bottom/79.27.1841.1053@79.27.1841.1053" timestamp="1580823884231" />
-    <state width="1807" height="287" key="GridCell.Tab.0.center" timestamp="1580827366794">
+    <state width="1807" height="287" key="GridCell.Tab.0.center" timestamp="1580830648885">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="287" key="GridCell.Tab.0.center/1920.0.1920.1080/67.27.1853.1053@67.27.1853.1053" timestamp="1580827366794" />
+    <state width="1807" height="287" key="GridCell.Tab.0.center/1920.0.1920.1080/67.27.1853.1053@67.27.1853.1053" timestamp="1580830648885" />
     <state width="1795" height="440" key="GridCell.Tab.0.center/79.27.1841.1053@79.27.1841.1053" timestamp="1580823884230" />
-    <state width="1807" height="287" key="GridCell.Tab.0.left" timestamp="1580827366793">
+    <state width="1807" height="287" key="GridCell.Tab.0.left" timestamp="1580830648885">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="287" key="GridCell.Tab.0.left/1920.0.1920.1080/67.27.1853.1053@67.27.1853.1053" timestamp="1580827366793" />
+    <state width="1807" height="287" key="GridCell.Tab.0.left/1920.0.1920.1080/67.27.1853.1053@67.27.1853.1053" timestamp="1580830648885" />
     <state width="1795" height="440" key="GridCell.Tab.0.left/79.27.1841.1053@79.27.1841.1053" timestamp="1580823884230" />
-    <state width="1807" height="287" key="GridCell.Tab.0.right" timestamp="1580827366794">
+    <state width="1807" height="287" key="GridCell.Tab.0.right" timestamp="1580830648885">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="287" key="GridCell.Tab.0.right/1920.0.1920.1080/67.27.1853.1053@67.27.1853.1053" timestamp="1580827366794" />
+    <state width="1807" height="287" key="GridCell.Tab.0.right/1920.0.1920.1080/67.27.1853.1053@67.27.1853.1053" timestamp="1580830648885" />
     <state width="1795" height="440" key="GridCell.Tab.0.right/79.27.1841.1053@79.27.1841.1053" timestamp="1580823884231" />
     <state x="676" y="180" width="1024" height="845" key="SettingsEditor" timestamp="1580826823857">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="676" y="180" key="SettingsEditor/1920.0.1920.1080/67.27.1853.1053@67.27.1853.1053" timestamp="1580826823857" />
     <state x="684" y="180" width="1024" height="845" key="SettingsEditor/79.27.1841.1053@79.27.1841.1053" timestamp="1580826104217" />
+    <state x="588" y="275" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1580828988298">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="588" y="275" width="800" height="528" key="Vcs.Push.Dialog.v2/1920.0.1920.1080/67.27.1853.1053@67.27.1853.1053" timestamp="1580828988298" />
     <state x="538" y="406" key="com.intellij.ide.util.TipDialog" timestamp="1580826839625">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
