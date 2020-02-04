@@ -110,7 +110,7 @@ public class Toiminnot{
     }
 
     private Boolean loytyy(String table, String haettava) throws SQLException{ ///etsii pöydästä tietoa, palauttaa true jos löytyy
-        PreparedStatement p = null;
+        PreparedStatement p;
         if(table.equals("Asiakkaat")){
             p = this.db.prepareStatement("SELECT nimi FROM Asiakkaat WHERE nimi=?");
         }
