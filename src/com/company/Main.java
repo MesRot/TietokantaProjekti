@@ -60,7 +60,11 @@ public class Main {
                 case 6:
                     System.out.println("Anna paketin seurantakoodi:");
                     String kkoodi = lukija.nextLine();
-                    To.haeHistoria(kkoodi);
+                    To.printHistoria(kkoodi);
+                    break;
+
+
+
 
             }
         }

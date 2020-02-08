@@ -100,13 +100,32 @@ public class Toiminnot{
         return id;
     }
 
-    public void haeHistoria(String koodi) throws SQLException{
+    public void printHistoria(String koodi) throws SQLException{
         if(this.loytyy("Paketit", koodi)){
-
+            PreparedStatement p = this.db.prepareStatement("SELECT Paketit.koodi, Paikat.nimi, Tapahtumat.tapahtuman_kuvaus FROM Paketit, Paikat, Tapahtumat WHERE Paketit.koodi= ? AND Paketit.id = Tapahtumat.paketti_id AND Paikat.id = Tapahtumat.paikka_id");
+            p.setString(1, koodi);
+            ResultSet r = p.executeQuery();
+            while (r.next()) {
+                System.out.println(r.getString("koodi")+", "+r.getString("nimi")+ ", " + r.getString("tapahtuman_kuvaus")); //lisaa kelllonajan haku
+            }
         }
         else{
             System.out.println("Pakettia ei löytynyt");
         }
+    }
+    public void printLukumaara(String koodi) throws SQLException {
+        if(this.loytyy("Paketit", koodi)){
+            PreparedStatement p = this.db.prepareStatement("SELECT Asiakkaat.nimi, Paketit.koodi, COUNT(Tapahtumat.id) FROM Paketit, Asiakkaat, Tapahtumat WHERE Asiakkaat.id=1 AND Tapahtumat.paketti_id=Paketit.id AND Paketit.asiakas_id=Asiakkaat.id GROUP BY Paketit.id");
+            p.setString(1, koodi);
+            ResultSet r = p.executeQuery();
+            while (r.next()) {
+                System.out.println(r.getString("koodi")+", "+r.getString("nimi")+ ", " + r.getString("tapahtuman_kuvaus")); //lisaa kelllonajan haku
+            }
+        }
+        else{
+            System.out.println("Pakettia ei löytynyt");
+        }
+
     }
 
     private Boolean loytyy(String table, String haettava) throws SQLException{ ///etsii pöydästä tietoa, palauttaa true jos löytyy
