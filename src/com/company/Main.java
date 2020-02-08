@@ -63,7 +63,11 @@ public class Main {
                     To.printHistoria(kkoodi);
                     break;
 
-
+                case 7:
+                    System.out.println("Anna asiakkaan nimi:");
+                    String aasiakas = lukija.nextLine();
+                    To.printPakettiMaara(aasiakas);
+                    break;
 
 
             }

@@ -113,19 +113,18 @@ public class Toiminnot{
             System.out.println("Pakettia ei löytynyt");
         }
     }
-    public void printLukumaara(String koodi) throws SQLException {
-        if(this.loytyy("Paketit", koodi)){
-            PreparedStatement p = this.db.prepareStatement("SELECT Asiakkaat.nimi, Paketit.koodi, COUNT(Tapahtumat.id) FROM Paketit, Asiakkaat, Tapahtumat WHERE Asiakkaat.id=1 AND Tapahtumat.paketti_id=Paketit.id AND Paketit.asiakas_id=Asiakkaat.id GROUP BY Paketit.id");
-            p.setString(1, koodi);
+    public void printPakettiMaara(String asiakas) throws SQLException {
+        if(this.loytyy("Asiakkaat", asiakas)) {
+            PreparedStatement p = this.db.prepareStatement("SELECT Asiakkaat.nimi, Paketit.koodi, COUNT(Tapahtumat.id) maara FROM Paketit, Asiakkaat, Tapahtumat WHERE Asiakkaat.id=1 AND Tapahtumat.paketti_id=Paketit.id AND Paketit.asiakas_id=Asiakkaat.id GROUP BY Paketit.id");
+            //.setString(1, asiakas);
             ResultSet r = p.executeQuery();
             while (r.next()) {
-                System.out.println(r.getString("koodi")+", "+r.getString("nimi")+ ", " + r.getString("tapahtuman_kuvaus")); //lisaa kelllonajan haku
+                System.out.println(r.getString("koodi") + ", " + r.getInt("maara") + " tapahtumaa");
+            }
+        else{
+                System.out.println("Pakettia ei löytynyt");
             }
         }
-        else{
-            System.out.println("Pakettia ei löytynyt");
-        }
-
     }
 
     private Boolean loytyy(String table, String haettava) throws SQLException{ ///etsii pöydästä tietoa, palauttaa true jos löytyy
