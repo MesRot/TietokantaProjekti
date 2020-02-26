@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) throws SQLException {
 
         Scanner lukija = new Scanner(System.in);
-        Toiminnot To = new Toiminnot();
+        Toiminnot toim = new Toiminnot();
 
 
         while(true){
@@ -24,19 +24,19 @@ public class Main {
 
             switch(valinta){
                 case 1:
-                    To.teeTietokanta();
+                    toim.teeTietokanta();
                     break;
 
                 case 2:
                     System.out.println("Anna paikan nimi:");
                     String nimi = lukija.nextLine();
-                    To.teePaikka(nimi);
+                    toim.teePaikka(nimi);
                     break;
 
                 case 3:
                     System.out.println("Anna asiakkaan nimi:");
                     String animi = lukija.nextLine();
-                    To.teeAsiakas(animi);
+                    toim.teeAsiakas(animi);
                     break;
 
                 case 4:
@@ -44,7 +44,7 @@ public class Main {
                     String koodi = lukija.nextLine();
                     System.out.println("Anna asiakkaan nimi:");
                     String jnimi = lukija.nextLine();
-                    To.teePaketti(koodi, jnimi);
+                    toim.teePaketti(koodi, jnimi);
                     break;
 
                 case 5:
@@ -54,22 +54,24 @@ public class Main {
                     String paikka = lukija.nextLine();
                     System.out.println("Anna tapahtuman kuvaus: ");
                     String kuvaus = lukija.nextLine();
-                    To.teeTapahtuma(pkoodi, paikka, kuvaus);
+                    toim.teeTapahtuma(pkoodi, paikka, kuvaus);
                     break;
 
                 case 6:
                     System.out.println("Anna paketin seurantakoodi:");
                     String kkoodi = lukija.nextLine();
-                    To.printHistoria(kkoodi);
+                    toim.printHistoria(kkoodi);
                     break;
 
                 case 7:
                     System.out.println("Anna asiakkaan nimi:");
                     String aasiakas = lukija.nextLine();
-                    To.printPakettiMaara(aasiakas);
+                    toim.printPakettiMaara(aasiakas);
                     break;
 
-
+                case 9:
+                    System.out.println("Suoritetaan järjestelmän nopeuden mittaus...");
+                    Testaus.testaaKaikki(toim);
             }
         }
     }
