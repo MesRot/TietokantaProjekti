@@ -91,6 +91,9 @@ public class Toiminnot{
         if(table.equals("Paketit")){
             p = this.db.prepareStatement("SELECT id FROM Paketit WHERE koodi = ?");
         }
+        if(table.equals("Paikat")){
+            p = this.db.prepareStatement("SELECT id FROM Paikat WHERE nimi = ?");
+        }
 
         p.setString(1, haettava);
         ResultSet r = p.executeQuery();
@@ -104,7 +107,6 @@ public class Toiminnot{
         PreparedStatement p = null;
         if(table.equals("Asiakkaat")){
             p = this.db.prepareStatement("SELECT nimi FROM Asiakkaat WHERE nimi=?");
-
         }
         if(table.equals("Paikat")){
             p = this.db.prepareStatement("SELECT nimi FROM Paikat WHERE nimi = ?");
