@@ -4,7 +4,7 @@ package com.company;
 import java.sql.*;
 
 public class Toiminnot{
-    Connection db;
+    private Connection db;
 
     public Toiminnot() throws SQLException{
         this.db = DriverManager.getConnection("jdbc:sqlite:testi.db");
@@ -39,8 +39,7 @@ public class Toiminnot{
     }
     public void teeAsiakas(String nimi) throws SQLException{
         if(!this.loytyy("Asiakkaat", nimi)){
-            Connection db = DriverManager.getConnection("jdbc:sqlite:testi.db");
-            PreparedStatement p = db.prepareStatement("INSERT INTO Asiakkaat (nimi) VALUES (?)");
+            PreparedStatement p = this.db.prepareStatement("INSERT INTO Asiakkaat (nimi) VALUES (?)");
             p.setString(1,nimi);
             p.execute();
         }
@@ -52,10 +51,9 @@ public class Toiminnot{
     }
     public void teePaketti(String koodi, String asiakasNimi) throws SQLException {
         if(this.loytyy("Asiakkaat", asiakasNimi)){
-            Connection db = DriverManager.getConnection("jdbc:sqlite:testi.db");
             String paivamaara = "";
             int asiakasid = haeId("Asiakkaat", asiakasNimi);
-            PreparedStatement p = db.prepareStatement("INSERT INTO Paketit (koodi, asiakas_id) VALUES (?, ?)");
+            PreparedStatement p = this.db.prepareStatement("INSERT INTO Paketit (koodi, asiakas_id) VALUES (?, ?)");
             p.setString(1, koodi);
             p.setString(2, String.valueOf(asiakasid));
             p.execute();
@@ -66,11 +64,10 @@ public class Toiminnot{
     }
     public void teeTapahtuma(String koodi, String paikka, String kuvaus) throws SQLException{
         if(this.loytyy("Paketit", koodi) && this.loytyy("Paikat", paikka)){
-            Connection db = DriverManager.getConnection("jdbc:sqlite:testi.db");
             int paikkaId = haeId("Paikat", paikka);
             int pakettiId = haeId("Paketit", koodi);
             String paivamaara = "222";
-            PreparedStatement p = db.prepareStatement("INSERT INTO Tapahtumat (paketti_id, paikka_id, tapahtuman_kuvaus, paivamaara) VALUES (?, ?, ?, ?)");
+            PreparedStatement p = this.db.prepareStatement("INSERT INTO Tapahtumat (paketti_id, paikka_id, tapahtuman_kuvaus, paivamaara) VALUES (?, ?, ?, ?)");
             p.setString(1, String.valueOf(pakettiId));
             p.setString(2, String.valueOf(paikkaId));
             p.setString(3, kuvaus);
