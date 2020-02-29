@@ -50,7 +50,10 @@ public class Testaus {
     static public void testi4(Toiminnot to) throws SQLException {
         Random rng = new Random();
         long alku = System.nanoTime();
-        for(int i = 0; i < 1000; i++){
+        for(int i = 0; i < 1000000000; i++){
+            if(i % 10000 == 0){
+                System.out.println("Paasty pakettiin: " + i);
+            }
             String koodi = "KOODI" + rng.nextInt(1000);
             String paikka = "P" + (rng.nextInt(1000) + 1);
             String kuvaus = "Kuvaus numero " + i+1;
