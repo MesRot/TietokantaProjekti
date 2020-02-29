@@ -2,6 +2,9 @@ package com.company;
 
 
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Toiminnot{
     private Connection db;
@@ -11,9 +14,8 @@ public class Toiminnot{
     }
     public void teePaikka(String paikannimi) throws SQLException {
         if(!this.loytyy("Paikat", paikannimi)){
-            Connection db = DriverManager.getConnection("jdbc:sqlite:testi.db");
-            Statement s = db.createStatement();
-            PreparedStatement p = db.prepareStatement("INSERT INTO Paikat (nimi) VALUES (?)");
+            Statement s = this.db.createStatement();
+            PreparedStatement p = this.db.prepareStatement("INSERT INTO Paikat (nimi) VALUES (?)");
             p.setString(1, paikannimi);
             p.execute();
         }
@@ -30,11 +32,10 @@ public class Toiminnot{
             s.execute("CREATE TABLE Asiakkaat (id INTEGER PRIMARY KEY, nimi TEXT)");
             s.execute("CREATE TABLE Paikat (id INTEGER PRIMARY KEY, nimi TEXT)");
             s.execute("CREATE TABLE Paketit (id INTEGER PRIMARY KEY, koodi TEXT, asiakas_id INTEGER)");
-            s.execute("CREATE TABLE Tapahtumat (id INTEGER PRIMARY KEY, paketti_id INTEGER, paikka_id INTEGER, tapahtuman_kuvaus TEXT, paivamaara TEXT)");
+            s.execute("CREATE TABLE Tapahtumat (id INTEGER PRIMARY KEY, paketti_id INTEGER, paikka_id INTEGER, tapahtuman_kuvaus TEXT, paivamaara TEXT, kellonaika TEXT)");
         }
         catch (Exception e){
             System.out.println("Tietokanta tehtynä jo valmiiksi");
-
         }
     }
     public void teeAsiakas(String nimi) throws SQLException{
@@ -46,8 +47,6 @@ public class Toiminnot{
         else{
             System.out.println("Asiakas löytyy jo tietokannasta");
         }
-
-
     }
     public void teePaketti(String koodi, String asiakasNimi) throws SQLException {
         if(this.loytyy("Asiakkaat", asiakasNimi)){
@@ -64,14 +63,18 @@ public class Toiminnot{
     }
     public void teeTapahtuma(String koodi, String paikka, String kuvaus) throws SQLException{
         if(this.loytyy("Paketit", koodi) && this.loytyy("Paikat", paikka)){
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Date date = new Date();
+            String paivamaara = dateFormat.format(date).split(" ")[0];
+            String kellonAika = dateFormat.format(date).split(" ")[1];
             int paikkaId = haeId("Paikat", paikka);
             int pakettiId = haeId("Paketit", koodi);
-            String paivamaara = "222";
-            PreparedStatement p = this.db.prepareStatement("INSERT INTO Tapahtumat (paketti_id, paikka_id, tapahtuman_kuvaus, paivamaara) VALUES (?, ?, ?, ?)");
+            PreparedStatement p = this.db.prepareStatement("INSERT INTO Tapahtumat (paketti_id, paikka_id, tapahtuman_kuvaus, paivamaara, kellonaika) VALUES (?, ?, ?, ?, ?)");
             p.setString(1, String.valueOf(pakettiId));
             p.setString(2, String.valueOf(paikkaId));
             p.setString(3, kuvaus);
             p.setString(4, paivamaara);
+            p.setString(5, kellonAika);
             p.execute();
         }
         else{
@@ -134,7 +137,7 @@ public class Toiminnot{
             p.setString(2, paivamaara);
             ResultSet r = p.executeQuery();
             while (r.next()) {
-                System.out.println("Paivamaaralla " + paivamaara + " loytyi " + ", " + r.getInt("tapahtumia") + " tapahtumaa");
+                System.out.println("Paivamaaralla " + paivamaara + " loytyi: " + r.getInt("tapahtumia") + " tapahtumaa");
             }
         }
         else{

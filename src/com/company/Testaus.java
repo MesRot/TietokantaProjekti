@@ -21,7 +21,7 @@ public class Testaus {
         }
         long kulunutAika = System.nanoTime() - alku;
 
-        printKulunutAika(1, kulunutAika);
+        System.out.println("Aikaa kului testiin 1: " + (kulunutAika/1000000000) + " sekuntia");
     }
 
     static public void testi2(Toiminnot to) throws SQLException {
@@ -32,7 +32,7 @@ public class Testaus {
         }
         long kulunutAika = System.nanoTime() - alku;
 
-        printKulunutAika(2, kulunutAika);
+        System.out.println("Aikaa kului testiin 2: " + (kulunutAika/1000000000) + " sekuntia");
     }
 
     static public void testi3(Toiminnot to) throws SQLException {
@@ -44,7 +44,7 @@ public class Testaus {
             to.teePaketti(koodi, asiakas);
         }
         long kulunutAika = System.nanoTime() - alku;
-        printKulunutAika(3, kulunutAika);
+        System.out.println("Aikaa kului testiin 3: " + (kulunutAika/1000000000) + " sekuntia");
     }
 
     static public void testi4(Toiminnot to) throws SQLException {
@@ -60,7 +60,7 @@ public class Testaus {
             to.teeTapahtuma(koodi, paikka, kuvaus);
         }
         long kulunutAika = System.nanoTime() - alku;
-        printKulunutAika(4, kulunutAika);
+        System.out.println("Aikaa kului testiin 4: " + (kulunutAika/1000000000) + " sekuntia");
 
     }
 
@@ -72,9 +72,6 @@ public class Testaus {
             to.printPakettiMaara(asiakas);
         }
         long kulunutAika = System.nanoTime() - alku;
-        printKulunutAika(5, kulunutAika);
-    }
-    private static void printKulunutAika(int testi, long aika){
-        System.out.println("Aikaa kului testiin " + testi + ": " + (aika/1000000000) + " sekuntia");
+        System.out.println("Aikaa kului testiin 5: " + (kulunutAika/1000000000) + " sekuntia");
     }
 }
