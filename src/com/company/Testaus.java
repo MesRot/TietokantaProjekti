@@ -16,7 +16,7 @@ public class Testaus {
     static public void testi1(Toiminnot to) throws SQLException {
         long alku = System.nanoTime();
         for(int i = 0; i < 1000; i++){
-            String paikka = "P" + i+1;
+            String paikka = "P" + (i+1);
             to.teePaikka(paikka);
         }
         long kulunutAika = System.nanoTime() - alku;
@@ -52,10 +52,9 @@ public class Testaus {
         long alku = System.nanoTime();
         for(int i = 0; i < 1000; i++){
             String koodi = "KOODI" + rng.nextInt(1000);
-            String asiakas = "A" + (rng.nextInt(1000) + 1);
-            System.out.println(koodi + "   " + asiakas);
+            String paikka = "P" + (rng.nextInt(1000) + 1);
             String kuvaus = "Kuvaus numero " + i+1;
-            to.teeTapahtuma(koodi, asiakas, kuvaus);
+            to.teeTapahtuma(koodi, paikka, kuvaus);
         }
         long kulunutAika = System.nanoTime() - alku;
         printKulunutAika(4, kulunutAika);
@@ -72,7 +71,7 @@ public class Testaus {
         long kulunutAika = System.nanoTime() - alku;
         printKulunutAika(5, kulunutAika);
     }
-    static void printKulunutAika(int testi, long aika){
+    private static void printKulunutAika(int testi, long aika){
         System.out.println("Aikaa kului testiin " + testi + ": " + (aika/1000000000) + " sekuntia");
     }
 }

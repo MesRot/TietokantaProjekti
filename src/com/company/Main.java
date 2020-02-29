@@ -12,7 +12,7 @@ public class Main {
 
 
         while(true){
-            int valinta = 0;
+            int valinta;
             System.out.println("Valitse toiminto (1-9):");
             try{
                 valinta = Integer.parseInt(lukija.nextLine());
@@ -69,9 +69,19 @@ public class Main {
                     toim.printPakettiMaara(aasiakas);
                     break;
 
+                case 8:
+                    System.out.println("Anna paivamaara: (muodossa dd:mm:yyyy");
+                    String paivamaara = lukija.nextLine();
+                    System.out.println("Anna paikka");
+                    String spaikka = lukija.nextLine();
+                    toim.printPaivamaaranPerusteella(paivamaara, spaikka);
+                    break;
+
+
                 case 9:
                     System.out.println("Suoritetaan järjestelmän nopeuden mittaus...");
                     Testaus.testaaKaikki(toim);
+                    break;
             }
         }
     }

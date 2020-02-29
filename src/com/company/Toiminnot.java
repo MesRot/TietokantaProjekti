@@ -30,13 +30,12 @@ public class Toiminnot{
             s.execute("CREATE TABLE Asiakkaat (id INTEGER PRIMARY KEY, nimi TEXT)");
             s.execute("CREATE TABLE Paikat (id INTEGER PRIMARY KEY, nimi TEXT)");
             s.execute("CREATE TABLE Paketit (id INTEGER PRIMARY KEY, koodi TEXT, asiakas_id INTEGER)");
-            s.execute("CREATE TABLE Tapahtumat (id INTEGER PRIMARY KEY, paketti_id INTEGER, paikka_id INTEGER, tapahtuman_kuvaus TEXT)");
+            s.execute("CREATE TABLE Tapahtumat (id INTEGER PRIMARY KEY, paketti_id INTEGER, paikka_id INTEGER, tapahtuman_kuvaus TEXT, paivamaara TEXT)");
         }
         catch (Exception e){
             System.out.println("Tietokanta tehtynä jo valmiiksi");
 
         }
-
     }
     public void teeAsiakas(String nimi) throws SQLException{
         if(!this.loytyy("Asiakkaat", nimi)){
@@ -54,6 +53,7 @@ public class Toiminnot{
     public void teePaketti(String koodi, String asiakasNimi) throws SQLException {
         if(this.loytyy("Asiakkaat", asiakasNimi)){
             Connection db = DriverManager.getConnection("jdbc:sqlite:testi.db");
+            String paivamaara = "";
             int asiakasid = haeId("Asiakkaat", asiakasNimi);
             PreparedStatement p = db.prepareStatement("INSERT INTO Paketit (koodi, asiakas_id) VALUES (?, ?)");
             p.setString(1, koodi);
@@ -69,10 +69,12 @@ public class Toiminnot{
             Connection db = DriverManager.getConnection("jdbc:sqlite:testi.db");
             int paikkaId = haeId("Paikat", paikka);
             int pakettiId = haeId("Paketit", koodi);
-            PreparedStatement p = db.prepareStatement("INSERT INTO Tapahtumat (paketti_id, paikka_id, tapahtuman_kuvaus) VALUES (?, ?, ?)");
+            String paivamaara = "222";
+            PreparedStatement p = db.prepareStatement("INSERT INTO Tapahtumat (paketti_id, paikka_id, tapahtuman_kuvaus, paivamaara) VALUES (?, ?, ?, ?)");
             p.setString(1, String.valueOf(pakettiId));
             p.setString(2, String.valueOf(paikkaId));
             p.setString(3, kuvaus);
+            p.setString(4, paivamaara);
             p.execute();
         }
         else{
@@ -128,6 +130,21 @@ public class Toiminnot{
                 System.out.println("Pakettia ei löytynyt");
             }
         }
+    public void printPaivamaaranPerusteella(String paivamaara, String paikka) throws SQLException {
+        if(this.loytyy("Paikat", paikka)){
+            PreparedStatement p = this.db.prepareStatement("SELECT P.nimi as kaupunki, T.paivamaara as paivamaara, COUNT(T.id) as tapahtumia FROM Paikat P LEFT JOIN Tapahtumat T ON T.paikka_id=P.id AND P.nimi=?  AND T.paivamaara=?");
+            p.setString(1, paikka);
+            p.setString(2, paivamaara);
+            ResultSet r = p.executeQuery();
+            while (r.next()) {
+                System.out.println("Paivamaaralla " + paivamaara + " loytyi " + ", " + r.getInt("tapahtumia") + " tapahtumaa");
+            }
+        }
+        else{
+            System.out.println("Paikkaa ei loytynyt");
+        }
+
+    }
 
     private Boolean loytyy(String table, String haettava) throws SQLException{ ///etsii pöydästä tietoa, palauttaa true jos löytyy
         PreparedStatement p;
