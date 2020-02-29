@@ -8,6 +8,7 @@ public class Main {
     public static void main(String[] args) throws SQLException {
 
         Scanner lukija = new Scanner(System.in);
+        String aa = "Kurwa";
         Toiminnot toim = new Toiminnot();
 
 
